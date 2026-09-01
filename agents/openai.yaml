@@ -1,0 +1,4 @@
+interface:
+  display_name: "Diagnose Bug"
+  short_description: "Build a reproducible bug-fixing loop"
+  default_prompt: "Use $diagnose-bug to reproduce and diagnose this failure."
