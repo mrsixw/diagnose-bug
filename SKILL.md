@@ -1,21 +1,36 @@
 ---
 name: diagnose-bug
-description: Diagnose bugs, failures, regressions, and performance problems by building a tight reproducible feedback loop before hypothesising or fixing.
+description: Diagnose bugs, failures, regressions, and performance problems through a reproducible feedback loop, and apply a verified fix when requested.
 ---
 
-# Diagnose Bug
+# Diagnose bug
 
-Use a disciplined loop so the fix addresses the reported symptom rather than a nearby failure.
+Establish the cause with a feedback loop that detects the reported symptom. Do
+not start from a preferred fix and work backwards.
 
-## Workflow
+## Build the evidence
 
-1. Redact secrets and sensitive payloads from evidence.
-2. Build the smallest fast feedback loop that can go red on the exact user symptom.
-3. Reproduce the issue repeatedly and capture the observable failure.
-4. Minimise the input, trace, or code path while preserving the symptom.
-5. Form a small set of competing hypotheses and instrument only the boundaries that distinguish them.
-6. Turn the minimised reproduction into a regression test.
-7. Apply the smallest fix, verify the regression test, then rerun the original reproduction.
-8. Remove temporary instrumentation and record the confirmed cause.
+1. Record the expected behaviour, observed behaviour, environment, and exact
+   reproduction command. Redact secrets and sensitive payloads.
+2. Reproduce the failure more than once. If it is intermittent, measure the
+   frequency and preserve the conditions under which it occurs.
+3. Reduce the input, trace, or code path while keeping the same symptom.
+4. Separate observations from inferences. Maintain a short hypothesis ledger
+   with evidence for and against each candidate cause.
+5. Add instrumentation only at boundaries that distinguish those hypotheses.
 
-Do not declare success because a command exits cleanly. The loop must detect this specific bug and remain deterministic enough to trust.
+If the symptom cannot be reproduced, report what was checked and what evidence
+is missing. Do not manufacture certainty from a nearby failure.
+
+## Fix when implementation is in scope
+
+Implementation is in scope when the user asked for a fix. Otherwise report the
+confirmed cause and stop. Before changing production code, turn the minimal
+reproduction into a behaviour-focused regression test and confirm that it fails
+for the intended reason. Apply the smallest fix that addresses the confirmed
+cause.
+
+Verify the regression test, the original reproduction, and the repository's
+applicable validation. Remove temporary instrumentation. Report the confirmed
+cause, changed behaviour, exact checks run, and any check that could not be run.
+A clean exit alone is not proof that this specific bug is fixed.
