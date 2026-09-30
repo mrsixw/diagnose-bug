@@ -1,6 +1,6 @@
 ---
 name: diagnose-bug
-description: Diagnose bugs, failures, regressions, and performance problems through a reproducible feedback loop, and apply a verified fix when requested.
+description: Diagnose a bug, failure, regression, or performance problem whose cause is unknown by building a reproducible feedback loop, and apply a verified fix only when requested. Use when the user asks to investigate, reproduce, or find the root cause of a failure. Not for building known desired behaviour test-first (use tdd).
 ---
 
 # Diagnose bug
@@ -18,6 +18,9 @@ not start from a preferred fix and work backwards.
 4. Separate observations from inferences. Maintain a short hypothesis ledger
    with evidence for and against each candidate cause.
 5. Add instrumentation only at boundaries that distinguish those hypotheses.
+
+Do not reproduce against or instrument production or shared environments
+without explicit approval.
 
 If the symptom cannot be reproduced, report what was checked and what evidence
 is missing. Do not manufacture certainty from a nearby failure.
