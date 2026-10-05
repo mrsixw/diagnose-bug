@@ -29,9 +29,9 @@ is missing. Do not manufacture certainty from a nearby failure.
 
 Implementation is in scope when the user asked for a fix. Otherwise report the
 confirmed cause and stop. Before changing production code, turn the minimal
-reproduction into a behaviour-focused regression test and confirm that it fails
-for the intended reason. Apply the smallest fix that addresses the confirmed
-cause.
+reproduction into a regression test at the component's boundary, following
+`boundary-testing`, and confirm that it fails for the intended reason. Apply
+the smallest fix that addresses the confirmed cause.
 
 Verify the regression test, the original reproduction, and the repository's
 applicable validation. Remove temporary instrumentation. Report the confirmed
